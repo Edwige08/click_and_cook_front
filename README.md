@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🥘 CLICK & COOK 👩‍🍳
 
-## Getting Started
 
-First, run the development server:
+## PRESENTATION DU PROJET
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Click & Cook est une application web permettant aux utilisateurs de poster leurs recettes préférées et de trouver de l'inspiration grâce aux recettes postées par les autres utilisateurs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## LA BRIGADE 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Notre brigade se compose de 3 personnes : Nous sommes Romain, Victor et Edwige, étudiant.e.s chez Ada Tech School Paris. Nous espérons que vous prendrez plaisir à visualiser et utiliser notre projet. Vous pouvez nous retrouver sur Github : 
+- Romain CHOUHANI : https://github.com/rchouhani
+- Victor LEPRON : https://github.com/victorlpr
+- Edwige SAVES : https://github.com/Edwige08
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## ORGANISATION DE NOTRE TRAVAIL
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Lundi 21 juillet :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Nous avons choisi le nom de notre projet et créé le logo
+- Nous avons fait une première version de notre schéma de BDD
+- Nous avons choisi notre BDDR : Supabase
+- Nous avons relié Supabase à notre back-end (Django)
+- Nous avons commencé la page d'accueil en front-end et création de components : footer, boutons, navbar
 
-## Deploy on Vercel
+### Mardi 22 juillet : 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Ce que nous projetons de faire : 
+- Valider notre schéma de BDD   --> OK
+- Créer les models sur Django   --> OK
+- Définir les routes à créer    --> en cours
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+- Nous avons validé notre schéma de BDD et créé les models sur Django
+- Définition des routes à créer
