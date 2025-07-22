@@ -2,6 +2,7 @@ import Image from "next/image";
 import ButtonOrange from "./components/ButtonOrange";
 import ButtonGreen from "./components/ButtonGreen";
 import CardPresentation from "./components/CardPresentation";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,17 +27,24 @@ export default function Home() {
           Rejoignez une communauté passionnée de cuisine où chaque plat raconte une histoire
         </p>
         <div
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-5 pb-7"
         >
-          <ButtonOrange
-            text="Se connecter"
-          />
-          <ButtonGreen
-            text="Créer mon compte"
-          />
+          <Link href="/signin">
+            <ButtonOrange
+              text="Se connecter"
+              classes="w-full"
+            />
+          </Link>
+          <Link href="/signup">
+            <ButtonGreen
+              text="Créer mon compte"
+              classes="w-full"
+            />
+          </Link>
         </div>
       </div>
-      <div>
+      <div
+      className="py-5 px-5">
         <h2
           className="pt-5 text-shadow-md font-bold text-2xl text-center"
         >
