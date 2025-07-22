@@ -7,7 +7,7 @@ export default function CardPresentation(props: { emoji: string, title: string, 
                 className="flex justify-center items-center"
             >
                 <p
-                    className="p-5 rounded-xl text-3xl bg-(--orangeColor)"
+                    className="p-5 rounded-xl text-3xl bg-(--redColor)"
                 >
                     {props.emoji}
                 </p>
