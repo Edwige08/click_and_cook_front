@@ -30,7 +30,6 @@ export default function Home() {
 
     return (
         <>
-            <Navbar />
             <h2 className="py-5 text-center text-xl font-bold">
                 Bonjour USER !
             </h2>
