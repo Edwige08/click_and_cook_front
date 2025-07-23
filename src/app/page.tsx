@@ -37,6 +37,7 @@ export default function Home() {
           </Link>
           <Link href="/signup">
             <ButtonGreen
+              type="button"
               text="Créer mon compte"
               classes="w-full"
             />
@@ -44,7 +45,7 @@ export default function Home() {
         </div>
       </div>
       <div
-      className="py-5 px-5">
+        className="py-5 px-5">
         <h2
           className="pt-5 text-shadow-md font-bold text-2xl text-center"
         >
