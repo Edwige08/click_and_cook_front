@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ButtonOrange from "./ButtonOrange";
+import Input from "./Input";
 
 export default function FormSignIn() {
     return (
@@ -11,26 +12,24 @@ export default function FormSignIn() {
             >
                 Se connecter :
             </h2>
-            <input
+            <Input
                 type="text"
-                placeholder="Votre nom d'utilisateur" 
-                className="p-2 rounded-sm border bg-(--lightColor)"
-                />
-            <input
-                type="text"
-                placeholder="Votre mot de passe" 
-                className="p-2 rounded-sm border bg-(--lightColor)"
-                />
+                placeholder="Votre nom d'utilisateur"
+            />
+            <Input
+                type="password"
+                placeholder="Votre mot de passe"
+            />
             <ButtonOrange
                 text="Connexion"
             />
             <Link href="/signup">
-            <p
-            className="underline"
-            >
-                Créer un compte
+                <p
+                    className="underline"
+                >
+                    Créer un compte
                 </p>
-                </Link>
+            </Link>
         </form>
     )
 }

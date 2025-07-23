@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ButtonGreen from "./ButtonGreen";
+import Input from "./Input";
 
 export default function FormSignUp() {
     return (
@@ -11,30 +12,25 @@ export default function FormSignUp() {
             >
                 Créer un compte :
             </h2>
-            <input
+            <Input
                 type="text"
                 placeholder="Prénom"
-                className="p-2 rounded-sm border bg-(--lightColor)"
             />
-            <input
+            <Input
                 type="text"
                 placeholder="Nom"
-                className="p-2 rounded-sm border bg-(--lightColor)"
             />
-            <input
-                type="text"
+            <Input
+                type="email"
                 placeholder="Email"
-                className="p-2 rounded-sm border bg-(--lightColor)"
             />
-            <input
+            <Input
                 type="text"
                 placeholder="Nom d'utilisateur"
-                className="p-2 rounded-sm border bg-(--lightColor)"
             />
-            <input
-                type="text"
+            <Input
+                type="password"
                 placeholder="Mot de passe"
-                className="p-2 rounded-sm border bg-(--lightColor)"
             />
             <ButtonGreen
                 text="Créer mon compte"
