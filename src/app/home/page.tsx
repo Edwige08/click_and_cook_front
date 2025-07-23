@@ -23,7 +23,7 @@ export default function Home() {
     const [lastRecipes, setLastRecipes] = useState([]);
 
     async function getRecipes () {
-        const response = await fetch(`${process.env.back_end_url}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_END_URL}`)
         const data = await response.json();
         setLastRecipes(data)
     }
