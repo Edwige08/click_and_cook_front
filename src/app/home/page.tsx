@@ -1,5 +1,8 @@
-import CardRecipe from "../components/CardRecipe";
-import Navbar from "../components/Navbar";
+'use client'
+
+import { useState } from "react";
+import CardRecipe from "../../components/CardRecipe";
+import Navbar from "../../components/Navbar";
 
 interface Recipe {
     titre: string,
@@ -16,18 +19,23 @@ const recipe: Recipe = {
 }
 
 export default function Home() {
+
+    const [lastRecipes, setLastRecipes] = useState([]);
+
+    async function getRecipes () {
+        const response = await fetch(`${process.env.back_end_url}`)
+        const data = await response.json();
+        setLastRecipes(data)
+    }
+
     return (
         <>
             <Navbar />
-            <h2
-                className="py-5 text-center text-xl font-bold"
-            >
+            <h2 className="py-5 text-center text-xl font-bold">
                 Bonjour USER !
             </h2>
 
-            <p
-                className="p-5 text-center"
-            >
+            <p className="p-5 text-center">
                 Voici les dernières recettes tout juste sorties du four :
             </p>
 

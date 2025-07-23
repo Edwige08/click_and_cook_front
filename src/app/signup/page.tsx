@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FormSignUp from "../components/FormSignUp";
+import FormSignUp from "../../components/FormSignUp";
 import Link from "next/link";
 
 export default function Home() {

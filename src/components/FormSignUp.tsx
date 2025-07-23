@@ -37,7 +37,7 @@ export default function FormSignUp() {
         setMessage('');
 
         try {
-            const response = await fetch(`${process.env.back_end_url}/user/`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_END_URL}/user/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

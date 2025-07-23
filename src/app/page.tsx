@@ -1,7 +1,7 @@
 import Image from "next/image";
-import ButtonOrange from "./components/ButtonOrange";
-import ButtonGreen from "./components/ButtonGreen";
-import CardPresentation from "./components/CardPresentation";
+import ButtonOrange from "../components/ButtonOrange";
+import ButtonGreen from "../components/ButtonGreen";
+import CardPresentation from "../components/CardPresentation";
 import Link from "next/link";
 
 export default function Home() {

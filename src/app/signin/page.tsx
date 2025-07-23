@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Navbar from "../components/Navbar";
-import FormSignIn from "../components/FormSignIn";
+import Navbar from "../../components/Navbar";
+import FormSignIn from "../../components/FormSignIn";
 import Link from "next/link";
 
 export default function Home() {
