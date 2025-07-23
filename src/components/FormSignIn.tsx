@@ -13,6 +13,7 @@ export default function FormSignIn() {
         username: '',
         password: ''
     });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<string>();
 
     const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +22,9 @@ export default function FormSignIn() {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
+
+        setIsLoading(true);
+        setMessage('');
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_END_URL}/login/`, {
@@ -42,9 +46,15 @@ export default function FormSignIn() {
             setTimeout(() => {
                 router.push('/home')
             }, 2000);
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue';
             setMessage(errorMessage);
+
+        } finally {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000)
         }
     }
 
@@ -73,6 +83,7 @@ export default function FormSignIn() {
                 onChange={HandleChange}
             />
             <ButtonOrange
+                type="submit"
                 text="Connexion"
             />
             <Link href="/signup">

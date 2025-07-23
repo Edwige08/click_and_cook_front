@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import ButtonGreen from "./ButtonGreen";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
-import { access } from "fs";
 
 interface FormData {
     firstname: string,
@@ -62,7 +61,9 @@ export default function FormSignUp() {
             setMessage(errorMessage);
 
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000)
         }
     }
 
