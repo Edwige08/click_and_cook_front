@@ -30,14 +30,14 @@ export default function FormSignIn() {
                 type="text"
                 placeholder="Votre nom d'utilisateur"
                 value={formData.username}
-                onChange={() => HandleChange}
+                onChange={HandleChange}
             />
             <Input
                 inputName="password"
                 type="password"
                 placeholder="Votre mot de passe"
                 value={formData.password}
-                onChange={() => HandleChange}
+                onChange={HandleChange}
             />
             <ButtonOrange
                 text="Connexion"
