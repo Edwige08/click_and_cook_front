@@ -30,7 +30,7 @@ export default function personnalProfile() {
             <div className="flex flex-col items-center">
                 <div className="flex flex-col items-center w-full">
                     <ButtonSection
-                        link="#"
+                        link="/home/publishRecipe"
                         image="➕"
                         text="Ajouter une recette"
                         classes="md:mb-6 border-2 text-lg py-3 bg-(--lightColor) md:w-160 hover:bg-(--redColor)"
