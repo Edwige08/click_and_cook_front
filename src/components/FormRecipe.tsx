@@ -52,38 +52,46 @@ export default function FormRecipe() {
                     <p className="font-bold">Liste des ingrédients :</p>
                     <div className="flex flex-col">
                         <div className="flex flex-row gap-2 pl-2">
-                            <p className="w-[40%]">Ingrédients :</p>
-                            <p className="w-[20%]">Qtés</p>
-                            <p className="w-[30%]">Unités</p>
+                            <p className="w-[44%]">Ingrédients :</p>
+                            <p className="w-[19%]">Qtés</p>
+                            <p className="w-[29%]">Unités</p>
+                            <p className="w-[8%] text-(--orangeColor)">.</p>
                         </div>
                         <div className="flex flex-row gap-2">
                             <Input
                                 inputName="ingredient"
                                 type="text"
                                 placeholder="ex : Tomates"
-                                classes="w-[45%]"
+                                classes="w-[44%]"
                             />
                             <Input
                                 inputName="quantity"
                                 type="number"
                                 placeholder="ex : 3"
-                                classes="w-[20%]"
+                                classes="w-[19%]"
                             />
                             <Input
                                 inputName="unity"
                                 type="text"
                                 placeholder="ex : unités"
-                                classes="w-[30%]"
+                                classes="w-[29%]"
                             />
-                            <button className="p-1 my-2 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
-                                <Trash2 />
+                            <button className="flex flex-col items-center w-[8%] ">
+                                <p className="m-auto p-1 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
+                                    <Trash2 />
+                                </p>
                             </button>
                         </div>
-                    </div>
-                    <div className="flex flex-col items-end">
-                        <button className="p-1 my-2 rounded-xl shadow-sm bg-(--greenColor) text-(--lightColor)">
-                            <CirclePlus />
-                        </button>
+                        <div className="flex flex-row gap-2">
+                            <div className="w-[44%] text-(--orangeColor)">.</div>
+                            <div className="w-[19%] text-(--orangeColor)">.</div>
+                            <div className="w-[29%] text-(--orangeColor)">.</div>
+                            <button className="flex flex-col items-center w-[8%]">
+                                <p className="m-auto p-1 rounded-xl shadow-sm bg-(--greenColor) text-(--lightColor)">
+                                    <CirclePlus />
+                                </p>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-col mb-4">
@@ -91,19 +99,23 @@ export default function FormRecipe() {
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row gap-2">
                             <Input
-                                inputName="ingredient"
+                                inputName="step"
                                 type="text"
                                 placeholder="ex : Epluchez les carottes."
-                                classes="w-[95%]"
+                                classes="w-[92%]"
                             />
-                            <button className="p-1 my-2 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
-                                <Trash2 />
+                            <button className="flex flex-col items-center w-[8%] ">
+                                <p className="m-auto p-1 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
+                                    <Trash2 />
+                                </p>
                             </button>
                         </div>
                     </div>
                     <div className="flex flex-col items-end">
-                        <button className="p-1 my-2 rounded-xl shadow-sm bg-(--greenColor) text-(--lightColor)">
-                            <CirclePlus />
+                        <button className="flex flex-col items-center w-[8%]">
+                            <p className="m-auto p-1 rounded-xl shadow-sm bg-(--greenColor) text-(--lightColor)">
+                                <CirclePlus />
+                            </p>
                         </button>
                     </div>
                 </div>
