@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 
-export default function Input(props: { inputName: string, type: string, placeholder?: string, classes?: string, value?: string, onChange?: ChangeEventHandler }) {
+export default function Input(props: { inputName: string, type: string, placeholder?: string, classes?: string, value?: string | number, onChange?: ChangeEventHandler }) {
     return (
         <input
             name={props.inputName}
