@@ -1,4 +1,4 @@
-export default function ButtonGreen(props: { disabled?: boolean, text: string, classes?: string }) {
+export default function ButtonSearch(props: { disabled?: boolean, text: string, classes?: string }) {
     return (
         <button
             type="submit"
