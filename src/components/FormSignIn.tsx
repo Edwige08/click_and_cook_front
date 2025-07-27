@@ -41,7 +41,8 @@ export default function FormSignIn() {
             }
 
             setMessage(data.message)
-            console.log(data)
+            console.log("data ", data)
+            localStorage.setItem("username", data.user.username)
 
             setTimeout(() => {
                 router.push('/home')
@@ -52,7 +53,7 @@ export default function FormSignIn() {
             setMessage(errorMessage);
 
         } finally {
-            console.log(message)
+            console.log("message ", message)
             setTimeout(() => {
                 setIsLoading(false);
             }, 2000)
