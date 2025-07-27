@@ -41,7 +41,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <Link
-                            href="#"
+                            href="/home/myRecipes"
                             className="flex flex-row gap-2 items-center md:w-30 hover:font-bold md:border-b md:py-2 md:flex-col md:rounded-t-4xl md:hover:bg-(--orangeColor)">
                             <ConciergeBell />
                             <p className="flex flex-col justify-end">
