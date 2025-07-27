@@ -159,7 +159,9 @@ export default function FormRecipe() {
                     <div className="flex flex-col gap-2">
                         {stepsList.map((step, index: number) => {
                             return (
-                                <div className="flex flex-row gap-2">
+                                <div className="flex flex-row gap-2"
+                                key={index}
+                                >
                                     <textarea
                                         name="step"
                                         placeholder="ex : Epluchez les carottes."

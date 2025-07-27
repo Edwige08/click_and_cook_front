@@ -52,6 +52,7 @@ export default function FormSignIn() {
             setMessage(errorMessage);
 
         } finally {
+            console.log(message)
             setTimeout(() => {
                 setIsLoading(false);
             }, 2000)
@@ -84,7 +85,7 @@ export default function FormSignIn() {
             />
             <ButtonOrange
                 type="submit"
-                text="Connexion"
+                text={isLoading ? "Connexion en cours ..." : "Connexion"}
             />
             <Link href="/signup">
                 <p
