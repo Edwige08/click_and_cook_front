@@ -5,7 +5,7 @@ export default function FormSearchBar() {
     return (
         <form
             action=""
-            className="flex flex-row gap-2 m-2 p-3 rounded-lg shadow-xl bg-(--orangeColor)"
+            className="flex flex-row gap-2 justify-center m-2 p-3 rounded-lg shadow-xl bg-(--orangeColor)"
         >
             <div
                 className="flex flex-col gap-2 w-[90%]">

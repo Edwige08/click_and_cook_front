@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CardRecipe from "../../components/CardRecipe";
 import Navbar from "../../components/Navbar";
+import FormSearchBar from "@/components/FormSearchBar";
 
 interface Recipe {
     titre: string,
@@ -33,6 +34,8 @@ export default function Home() {
             <h2 className="py-5 text-center text-xl font-bold">
                 Bonjour USER !
             </h2>
+
+            <FormSearchBar />
 
             <p className="p-5 text-center">
                 Voici les dernières recettes tout juste sorties du four :
