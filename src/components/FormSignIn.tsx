@@ -35,6 +35,8 @@ export default function FormSignIn() {
                 body: JSON.stringify(formData)
             });
             const data = await response.json();
+            console.log("Données reçues au login :", data);
+            localStorage.setItem('auth_token', data.auth_token);
 
             if (!response.ok) {
                 throw new Error(data.message || 'Erreur lors de la connexion')
