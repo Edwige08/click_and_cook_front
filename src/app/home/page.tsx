@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import CardRecipe from "../../components/CardRecipe";
-import Navbar from "../../components/Navbar";
 import FormSearchBar from "@/components/FormSearchBar";
-
-// const recipe: Recipe = {
-//     titre: 'Frites au four maison',
-//     photo: 'https://cdn.pixabay.com/photo/2024/04/16/16/40/ai-generated-8700413_1280.jpg',
-//     date: '22/07/2025',
-//     auteurice: 'Marie'
-// }
 
 export default function Home() {
   interface User {
     username: string;
+  }
+
+  interface UserDetail {
+    id: number,
+    firstname: string,
+    lastname: string,
+    email: string,
+    username: string
   }
 
   interface Recipe {
@@ -24,8 +24,49 @@ export default function Home() {
     prep_time_min: number;
     servings: number;
     picture: string;
-    created_at: string;
-    user: string;
+    likes_count: number;
+    is_liked: boolean;
+    user_detail: UserDetail;
+    created_at: Date;
+  }
+
+  const monthInLetters = (month: number) => {
+    if (month == 1) {
+      return "janvier"
+    }
+    if (month == 2) {
+      return "février"
+    }
+    if (month == 3) {
+      return "mars"
+    }
+    if (month == 4) {
+      return "avril"
+    }
+    if (month == 5) {
+      return "mai"
+    }
+    if (month == 6) {
+      return "juin"
+    }
+    if (month == 7) {
+      return "juillet"
+    }
+    if (month == 8) {
+      return "août"
+    }
+    if (month == 9) {
+      return "septembre"
+    }
+    if (month == 10) {
+      return "octobre"
+    }
+    if (month == 11) {
+      return "novembre"
+    }
+    if (month == 12) {
+      return "décembre"
+    }
   }
 
   const [searchValue, setSearchValue] = useState<string>("");
@@ -142,18 +183,25 @@ export default function Home() {
         {lastRecipes.length === 0 ? (
           <p className="text-center text-gray-500">Aucune recette trouvée.</p>
         ) : (
-          lastRecipes.map((recipe, index) => (
-            <CardRecipe
-              key={index}
-              title={recipe.title}
-              cook_time_min={recipe.cook_time_min}
-              prep_time_min={recipe.prep_time_min}
-              servings={recipe.servings}
-              picture={recipe.picture}
-              created_at={recipe.created_at}
-              user={recipe.user}
-            />
-          ))
+          lastRecipes.map((recipe, index) => {
+
+            const pubDate = new Date(recipe.created_at)
+            const publicationDate = `${pubDate.getDay()}${pubDate.getDay() == 1 ? 'er' : ''} ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}` 
+
+            return (
+              <CardRecipe
+                key={index}
+                title={recipe.title}
+                cook_time_min={recipe.cook_time_min}
+                prep_time_min={recipe.prep_time_min}
+                servings={recipe.servings}
+                picture={recipe.picture}
+                created_at={publicationDate}
+                user={recipe.user_detail.username}
+              />
+            )
+          }
+          )
         )}
       </div>
     </>
