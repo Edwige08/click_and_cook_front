@@ -3,11 +3,9 @@
 import { useEffect, useState } from "react";
 import CardRecipe from "../../components/CardRecipe";
 import FormSearchBar from "@/components/FormSearchBar";
+import { useUser } from "@/components/UserInfos";
 
 export default function Home() {
-  interface User {
-    username: string;
-  }
 
   interface UserDetail {
     id: number,
@@ -31,83 +29,61 @@ export default function Home() {
   }
 
   const monthInLetters = (month: number) => {
-    if (month == 1) {
-      return "janvier"
-    }
-    if (month == 2) {
-      return "février"
-    }
-    if (month == 3) {
-      return "mars"
-    }
-    if (month == 4) {
-      return "avril"
-    }
-    if (month == 5) {
-      return "mai"
-    }
-    if (month == 6) {
-      return "juin"
-    }
-    if (month == 7) {
-      return "juillet"
-    }
-    if (month == 8) {
-      return "août"
-    }
-    if (month == 9) {
-      return "septembre"
-    }
-    if (month == 10) {
-      return "octobre"
-    }
-    if (month == 11) {
-      return "novembre"
-    }
-    if (month == 12) {
-      return "décembre"
-    }
+    if (month == 0) { return "janvier" }
+    if (month == 1) { return "février" }
+    if (month == 2) { return "mars" }
+    if (month == 3) { return "avril" }
+    if (month == 4) { return "mai" }
+    if (month == 5) { return "juin" }
+    if (month == 6) { return "juillet" }
+    if (month == 7) { return "août" }
+    if (month == 8) { return "septembre" }
+    if (month == 9) { return "octobre" }
+    if (month == 10) { return "novembre" }
+    if (month == 11) { return "décembre" }
   }
+
+  const user = useUser();
+  console.log("🍅 user : ", user)
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [lastRecipes, setLastRecipes] = useState<Recipe[]>([]);
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    async function getUser() {
-      const token = localStorage.getItem("auth_token");
-      if (!token) return;
+  // useEffect(() => {
+  //   async function getUser() {
+  //     const token = localStorage.getItem("auth_token");
+  //     if (!token) return;
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACK_END_URL}/user/me/`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-        }
-      );
-      console.log("response : ", response);
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_BACK_END_URL}/user/me/`,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Token ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log("response : ", response);
 
-      const data = await response.json();
-      console.log("😁😁", data);
-      setUser(data.user);
-    }
-    getUser();
-  }, []);
+  //     const data = await response.json();
+  //     console.log("😁😁", data);
+  //     setUser(data.user);
+  //   }
+  //   getUser();
+  // }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      // async function getSearchRecipes() {
+      const token = localStorage.getItem("auth_token");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes`,
         {
-          // credentials: 'include',
           headers: {
-            Authorization: "Token c29fccbebea1072ceebb4eb212c3da1608d0fb56",
             "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
           },
         }
       );
@@ -118,7 +94,7 @@ export default function Home() {
 
       const data = await response.json();
       console.log("data :", data);
-      // }
+
     } catch (err) {
       const errorMessage =
         err instanceof Error
@@ -166,7 +142,7 @@ export default function Home() {
   return (
     <>
       <h2 className="py-5 text-center text-xl font-bold">
-        Bonjour {user ? user.username : "!"}
+        Bonjour {user ? user.user?.username : ""} !
       </h2>
 
       <FormSearchBar
@@ -186,7 +162,7 @@ export default function Home() {
           lastRecipes.map((recipe, index) => {
 
             const pubDate = new Date(recipe.created_at)
-            const publicationDate = `${pubDate.getDay()}${pubDate.getDay() == 1 ? 'er' : ''} ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}` 
+            const publicationDate = `${pubDate.getDay()}${pubDate.getDay() == 1 ? 'er' : ''} ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`
 
             return (
               <CardRecipe
