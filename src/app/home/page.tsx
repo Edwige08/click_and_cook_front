@@ -98,9 +98,9 @@ export default function Home() {
         {lastRecipes.length === 0 ? (
           <p className="text-center text-gray-500">Aucune recette trouvée.</p>
         ) : (
-          lastRecipes.map((recipe) => (
+          lastRecipes.map((recipe, index) => (
             <CardRecipe
-              key={recipe.id}
+              key={index}
               title={recipe.title}
               cook_time_min={recipe.cook_time_min}
               prep_time_min={recipe.prep_time_min}
