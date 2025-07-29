@@ -41,3 +41,19 @@ export interface Recipes {
     user_detail: User[];
     created_at: string;
 }
+
+export interface Recipe {
+    id: number;
+    title: string;
+    cook_time_min: number;
+    prep_time_min: number;
+    servings: number;
+    ingredients: Ingredients[];
+    steps: Step[];
+    picture: string;
+    likes_count: number;
+    is_liked: number;
+    user: number;
+    user_detail: UserDetail;
+    created_at: string;
+}
