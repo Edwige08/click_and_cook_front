@@ -6,13 +6,12 @@ import FormSearchBar from "@/components/FormSearchBar";
 import { useUser } from "@/components/UserInfos";
 
 export default function Home() {
-
   interface UserDetail {
-    id: number,
-    firstname: string,
-    lastname: string,
-    email: string,
-    username: string
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    username: string;
   }
 
   interface Recipe {
@@ -29,49 +28,49 @@ export default function Home() {
   }
 
   const monthInLetters = (month: number) => {
-    if (month == 0) { return "janvier" }
-    if (month == 1) { return "février" }
-    if (month == 2) { return "mars" }
-    if (month == 3) { return "avril" }
-    if (month == 4) { return "mai" }
-    if (month == 5) { return "juin" }
-    if (month == 6) { return "juillet" }
-    if (month == 7) { return "août" }
-    if (month == 8) { return "septembre" }
-    if (month == 9) { return "octobre" }
-    if (month == 10) { return "novembre" }
-    if (month == 11) { return "décembre" }
-  }
+    if (month == 0) {
+      return "janvier";
+    }
+    if (month == 1) {
+      return "février";
+    }
+    if (month == 2) {
+      return "mars";
+    }
+    if (month == 3) {
+      return "avril";
+    }
+    if (month == 4) {
+      return "mai";
+    }
+    if (month == 5) {
+      return "juin";
+    }
+    if (month == 6) {
+      return "juillet";
+    }
+    if (month == 7) {
+      return "août";
+    }
+    if (month == 8) {
+      return "septembre";
+    }
+    if (month == 9) {
+      return "octobre";
+    }
+    if (month == 10) {
+      return "novembre";
+    }
+    if (month == 11) {
+      return "décembre";
+    }
+  };
 
   const user = useUser();
-  console.log("🍅 user : ", user)
+  console.log("🍅 user : ", user);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [lastRecipes, setLastRecipes] = useState<Recipe[]>([]);
-  // const [user, setUser] = useState<User | null>(null);
-
-  // useEffect(() => {
-  //   async function getUser() {
-  //     const token = localStorage.getItem("auth_token");
-  //     if (!token) return;
-
-  //     const response = await fetch(
-  //       `${process.env.NEXT_PUBLIC_BACK_END_URL}/user/me/`,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Token ${token}`,
-  //         },
-  //       }
-  //     );
-  //     console.log("response : ", response);
-
-  //     const data = await response.json();
-  //     console.log("😁😁", data);
-  //     setUser(data.user);
-  //   }
-  //   getUser();
-  // }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -94,7 +93,6 @@ export default function Home() {
 
       const data = await response.json();
       console.log("data :", data);
-
     } catch (err) {
       const errorMessage =
         err instanceof Error
@@ -129,7 +127,7 @@ export default function Home() {
       }
 
       const data = await response.json();
-      console.log("data", data);
+      console.log("data: 😎😎", data);
       setLastRecipes(data.results || data);
     }
     getRecipes();
@@ -160,24 +158,27 @@ export default function Home() {
           <p className="text-center text-gray-500">Aucune recette trouvée.</p>
         ) : (
           lastRecipes.map((recipe, index) => {
-
-            const pubDate = new Date(recipe.created_at)
-            const publicationDate = `${pubDate.getDay()}${pubDate.getDay() == 1 ? 'er' : ''} ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`
+            const pubDate = new Date(recipe.created_at);
+            const publicationDate = `${pubDate.getDay()}${
+              pubDate.getDay() == 1 ? "er" : ""
+            } ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
 
             return (
-              <CardRecipe
-                key={index}
-                title={recipe.title}
-                cook_time_min={recipe.cook_time_min}
-                prep_time_min={recipe.prep_time_min}
-                servings={recipe.servings}
-                picture={recipe.picture}
-                created_at={publicationDate}
-                user={recipe.user_detail.username}
-              />
-            )
-          }
-          )
+              <a href={`home/recipe/${recipe.id}`} key={recipe.id}>
+                <CardRecipe
+                  key={index}
+                  id={recipe.id}
+                  title={recipe.title}
+                  cook_time_min={recipe.cook_time_min}
+                  prep_time_min={recipe.prep_time_min}
+                  servings={recipe.servings}
+                  picture={recipe.picture}
+                  created_at={publicationDate}
+                  user={recipe.user_detail.username}
+                />
+              </a>
+            );
+          })
         )}
       </div>
     </>
