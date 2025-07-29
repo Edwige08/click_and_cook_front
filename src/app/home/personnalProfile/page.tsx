@@ -36,10 +36,37 @@ export default function personnalProfile() {
     created_at: string;
   }
 
+  interface CreatedAt {
+    createdAt: string | null
+  }
   const [recipes, setRecipes] = useState<Recipes[]>([])
 
-  const user = useUser();
+  const user = useUser().user;
   console.log("🍐 user : ", user)
+  // console.log("📅 : ", user.user?.created_at);
+
+  // const getSubscriptionDate = () => {
+  //   if (user.user.created_at) {
+  //     return "🪑";
+      
+  //   }
+  // }
+  
+  // useEffect(() => {
+  //   getSubscriptionDate
+  // }, [])
+
+  // let createdAt
+  // if (user.user?.created_at) {
+  //   let createdAt = user.user?.created_at.toString();
+  // } else {
+  //   let createdAt = new Date();
+
+  // }
+  // console.log(createdAt);
+  
+  // const subDate = new Date(createdAt)
+  // const subscriptionDate = 
 
   useEffect(() => {
     async function getRecipes() {
@@ -65,9 +92,10 @@ export default function personnalProfile() {
     <>
       <div className="flex flex-col items-center">
         <h2 className="pt-7 pb-3 text-2xl font-bold">
-          Bonjour {user ? user.user?.username : ""} !
+          Bonjour {user ? user.username : ""} !
         </h2>
-        <p className="pb-5 italic">Inscrit.e depuis le 00/00/0000</p>
+        <p className="pb-5 italic">{user ? `Inscrit.e depuis le ${new Date(user.created_at).toLocaleDateString()}` : `` }</p>
+        {/* <p>{getSubscriptionDate}</p> */}
       </div>
       <div className="flex flex-row gap-2 justify-evenly flex-wrap p-2 mx-5 my-2 lg:mx-20 xl:mx-45 pt-5 rounded-lg shadow-lg bg-(--orangeColor)">
         <CardProfileStat
