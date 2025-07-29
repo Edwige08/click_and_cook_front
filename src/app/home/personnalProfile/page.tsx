@@ -36,9 +36,6 @@ export default function personnalProfile() {
     created_at: string;
   }
 
-  interface CreatedAt {
-    createdAt: string | null
-  }
   const [recipes, setRecipes] = useState<Recipes[]>([])
 
   const user = useUser().user;
@@ -50,7 +47,7 @@ export default function personnalProfile() {
       if (!token) return;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/9`, {
+        `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/${user?.id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${token}`,
