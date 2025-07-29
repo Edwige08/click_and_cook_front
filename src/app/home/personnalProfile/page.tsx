@@ -66,13 +66,13 @@ export default function personnalProfile() {
         </div>
         <div className="flex flex-col items-center w-full md:flex-row md:flex-wrap md:gap-2 md:justify-center lg:px-35 xl:px-2">
           <ButtonSection
-            link="#"
+            link="/home/myRecipes?tab=pub"
             image="🥘"
             text="Mes recettes publiées"
             classes="md:w-75 xl:w-65 "
           />
           <ButtonSection
-            link="#"
+            link="/home/myRecipes?tab=fav"
             image="🧡"
             text="Mes recettes favorites"
             classes="md:w-75 xl:w-65"
