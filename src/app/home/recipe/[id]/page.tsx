@@ -31,8 +31,8 @@ export default async function displayDynamicRecipes({ params }: Props) {
   console.log("recipe :", recipe);
   const pubDate = new Date(recipe.created_at);
   const publicationDate = `
-            ${pubDate.getDay()}
-            ${pubDate.getDay() == 1 ? "er" : ""}
+            ${pubDate.getDate()}
+            ${pubDate.getDate() == 1 ? "er" : ""}
             ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
 
   return (
