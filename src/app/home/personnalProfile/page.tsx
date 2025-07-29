@@ -8,7 +8,8 @@ import { Recipes } from "@/types/interface"
 
 export default function personnalProfile() {
 
-  const [recipes, setRecipes] = useState<Recipes[]>([])
+  const [recipes, setRecipes] = useState<Recipes[]>([]);
+  const [recipesLikedList, setRecipesLikedList] = useState<Recipes[]>([]);
 
   const user = useUser().user;
 
@@ -31,6 +32,27 @@ export default function personnalProfile() {
     getRecipes();
   }, []);
 
+  async function getLikedRecipes() {
+    const token = localStorage.getItem("auth_token");
+    if (!token) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/likes/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }
+    );
+    const data = await response.json();
+    console.log('🔰🔰', data)
+    setRecipesLikedList(data.results);
+  }
+
+  useEffect(() => {
+    getLikedRecipes()
+  }, []);
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -45,7 +67,10 @@ export default function personnalProfile() {
           statName={recipes.length > 1 ? "Recettes postées" : "Recette postée"}
         />
         <CardProfileStat statNumber={12} statName="Abonnements" />
-        <CardProfileStat statNumber={24} statName="Recettes favorites" />
+        <CardProfileStat
+          statNumber={recipesLikedList.length}
+          statName={recipes.length > 1 ? "Recettes favorites" : "Recette favorite"}
+        />
         <CardProfileStat statNumber={3} statName="Abonnés" />
       </div>
       <div>
