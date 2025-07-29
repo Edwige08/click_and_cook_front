@@ -2,6 +2,20 @@ export interface User {
     username: string;
 }
 
+export interface UserDetail {
+    id: number,
+    firstname: string,
+    lastname: string,
+    email: string,
+    username: string,
+}
+
+export interface Follows {
+    followed_user_detail: UserDetail,
+    following_user_detail: UserDetail,
+    following_user: number,
+}
+
 export interface Step {
     description: string;
 }
