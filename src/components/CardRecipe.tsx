@@ -8,7 +8,7 @@ export default function CardRecipe(props: {
     user: string
 }) {
     return (
-        <article className="flex flex-col items-center mx-2 max-w-80 overflow-hidden border rounded-3xl shadow-lg hover:translate-2">
+        <article className="flex flex-col items-center mx-2 max-w-80 overflow-hidden border rounded-3xl shadow-lg duration-120 ease-in-out hover:translate-1">
             <div className={"flex flex-col justify-center mb-2 overflow-hidden w-full h-50"}>
                 <img
                     src={props.picture}
