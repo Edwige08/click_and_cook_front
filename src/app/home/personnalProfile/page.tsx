@@ -78,13 +78,13 @@ export default function personnalProfile() {
             classes="md:w-75 xl:w-65"
           />
           <ButtonSection
-            link="#"
+            link="/home/follows"
             image="👩‍🍳"
             text="Mes abonnements"
             classes="md:w-75 xl:w-65 "
           />
           <ButtonSection
-            link="#"
+            link="/home/follows"
             image="👥"
             text="Mes abonnés"
             classes="md:w-75 xl:w-65 "
