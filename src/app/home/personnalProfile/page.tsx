@@ -2,6 +2,7 @@
 
 import ButtonSection from "@/components/ButtonSection";
 import CardProfileStat from "@/components/CardProfileStat";
+import { useUser } from "@/components/UserInfos";
 import { useEffect, useState } from "react";
 
 export default function personnalProfile() {
@@ -37,6 +38,9 @@ export default function personnalProfile() {
 
   const [recipes, setRecipes] = useState<Recipes[]>([])
 
+  const user = useUser();
+  console.log("🍐 user : ", user)
+
   useEffect(() => {
     async function getRecipes() {
       const token = localStorage.getItem("auth_token");
@@ -44,11 +48,11 @@ export default function personnalProfile() {
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/9`, {
-           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          }, 
-        }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
       );
       const data = await response.json();
       console.log('👀👀', data)
@@ -60,13 +64,15 @@ export default function personnalProfile() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <h2 className="pt-7 pb-3 text-2xl font-bold">Bonjour Username !</h2>
+        <h2 className="pt-7 pb-3 text-2xl font-bold">
+          Bonjour {user ? user.user?.username : ""} !
+        </h2>
         <p className="pb-5 italic">Inscrit.e depuis le 00/00/0000</p>
       </div>
       <div className="flex flex-row gap-2 justify-evenly flex-wrap p-2 mx-5 my-2 lg:mx-20 xl:mx-45 pt-5 rounded-lg shadow-lg bg-(--orangeColor)">
-        <CardProfileStat 
-          statNumber={recipes.length} 
-          statName="Recettes postées"
+        <CardProfileStat
+          statNumber={recipes.length}
+          statName={recipes.length > 1 ? "Recettes postées" : "Recette postée"}
         />
         <CardProfileStat statNumber={12} statName="Abonnements" />
         <CardProfileStat statNumber={24} statName="Recettes favorites" />
