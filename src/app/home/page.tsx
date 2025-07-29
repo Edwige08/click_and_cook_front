@@ -4,66 +4,23 @@ import { useEffect, useState } from "react";
 import CardRecipe from "../../components/CardRecipe";
 import FormSearchBar from "@/components/FormSearchBar";
 import { useUser } from "@/components/UserInfos";
+import { Recipe } from "@/types/interface";
 
 export default function Home() {
-  interface UserDetail {
-    id: number;
-    firstname: string;
-    lastname: string;
-    email: string;
-    username: string;
-  }
-
-  interface Recipe {
-    id: number;
-    title: string;
-    cook_time_min: number;
-    prep_time_min: number;
-    servings: number;
-    picture: string;
-    likes_count: number;
-    is_liked: boolean;
-    user_detail: UserDetail;
-    created_at: Date;
-  }
 
   const monthInLetters = (month: number) => {
-    if (month == 0) {
-      return "janvier";
-    }
-    if (month == 1) {
-      return "février";
-    }
-    if (month == 2) {
-      return "mars";
-    }
-    if (month == 3) {
-      return "avril";
-    }
-    if (month == 4) {
-      return "mai";
-    }
-    if (month == 5) {
-      return "juin";
-    }
-    if (month == 6) {
-      return "juillet";
-    }
-    if (month == 7) {
-      return "août";
-    }
-    if (month == 8) {
-      return "septembre";
-    }
-    if (month == 9) {
-      return "octobre";
-    }
-    if (month == 10) {
-      return "novembre";
-    }
-    if (month == 11) {
-      return "décembre";
-    }
+    if (month == 0) return "janvier";
+    if (month == 1) return "février";
+    if (month == 2) return "mars";
+    if (month == 3) return "avril";
+    if (month == 4) return "mai";
+    if (month == 5) return "juin";
+    if (month == 6) return "juillet";
+    if (month == 7) return "août";
+    if (month == 8) return "septembre";
+    if (month == 9) return "octobre";
+    if (month == 10) return "novembre";
+    if (month == 11) return "décembre";
   };
 
   const user = useUser();
@@ -159,14 +116,13 @@ export default function Home() {
         ) : (
           lastRecipes.map((recipe, index) => {
             const pubDate = new Date(recipe.created_at);
-            const publicationDate = `${pubDate.getDay()}${
-              pubDate.getDay() == 1 ? "er" : ""
-            } ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
+            const publicationDate = `${pubDate.getDate()}${pubDate.getDate() == 1 ? "er" : ""
+              } ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
 
             return (
               <a href={`home/recipe/${recipe.id}`} key={recipe.id}>
                 <CardRecipe
-                  key={index}
+                  key={recipe.id}
                   id={recipe.id}
                   title={recipe.title}
                   cook_time_min={recipe.cook_time_min}
