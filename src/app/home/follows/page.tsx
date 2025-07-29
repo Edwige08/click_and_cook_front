@@ -4,6 +4,7 @@ import MyFollowersList from "@/components/MyFollowersList"
 import { useUser } from "@/components/UserInfos"
 import { useEffect, useState } from "react"
 import { Follows } from "@/types/interface"
+import { useSearchParams } from "next/navigation"
 
 export default function Home() {
     const [myFollows, setMyFollows] = useState<boolean>(true)
@@ -12,6 +13,7 @@ export default function Home() {
     const [myFollowersList, setMyFollowersList] = useState<Follows[]>([])
 
     const user = useUser().user;
+    const searchParams = useSearchParams()
 
     const displayMyFollows = () => {
         if (!myFollows) {
@@ -27,6 +29,17 @@ export default function Home() {
     }
 
     useEffect(() => {
+        const currentTab = searchParams.get('tab')
+        if (currentTab === 'following') {
+            setMyFollowers(true)
+            setMyFollows(false)
+        } else {
+            setMyFollows(true)
+            setMyFollowers(false)
+        }
+    }, [searchParams])
+
+    useEffect(() => {
         async function getFollows() {
             const token = localStorage.getItem("auth_token");
             if (!token) return;
@@ -40,7 +53,6 @@ export default function Home() {
             }
             );
             const data = await response.json();
-            console.log('👀👀', data.results)
             setMyFollowsList(data.results);
         }
         getFollows();
@@ -60,7 +72,6 @@ export default function Home() {
             }
             );
             const data = await response.json();
-            console.log('🔰🔰', data.results)
             setMyFollowersList(data.results);
         }
         getFollowers();

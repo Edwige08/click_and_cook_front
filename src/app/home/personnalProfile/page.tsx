@@ -11,7 +11,6 @@ export default function personnalProfile() {
   const [recipes, setRecipes] = useState<Recipes[]>([])
 
   const user = useUser().user;
-  console.log("🍐 user : ", user)
 
   useEffect(() => {
     async function getRecipes() {
@@ -27,7 +26,6 @@ export default function personnalProfile() {
       }
       );
       const data = await response.json();
-      console.log('👀👀', data)
       setRecipes(data);
     }
     getRecipes();
@@ -39,7 +37,7 @@ export default function personnalProfile() {
         <h2 className="pt-7 pb-3 text-2xl font-bold">
           Bonjour {user ? user.username : ""} !
         </h2>
-        <p className="pb-5 italic">{user ? `Inscrit.e depuis le ${new Date(user.created_at).toLocaleDateString()}` : `` }</p>
+        <p className="pb-5 italic">{user ? `Inscrit.e depuis le ${new Date(user.created_at).toLocaleDateString()}` : ``}</p>
       </div>
       <div className="flex flex-row gap-2 justify-evenly flex-wrap p-2 mx-5 my-2 lg:mx-20 xl:mx-45 pt-5 rounded-lg shadow-lg bg-(--orangeColor)">
         <CardProfileStat
@@ -78,13 +76,13 @@ export default function personnalProfile() {
             classes="md:w-75 xl:w-65"
           />
           <ButtonSection
-            link="/home/follows"
+            link="/home/follows?tab=followed"
             image="👩‍🍳"
             text="Mes abonnements"
             classes="md:w-75 xl:w-65 "
           />
           <ButtonSection
-            link="/home/follows"
+            link="/home/follows?tab=following"
             image="👥"
             text="Mes abonnés"
             classes="md:w-75 xl:w-65 "
