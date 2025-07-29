@@ -1,4 +1,5 @@
 export default function CardRecipe(props: {
+    id: number,
     title: string,
     cook_time_min: number,
     prep_time_min: number,
