@@ -131,6 +131,7 @@ export default function Home() {
                   picture={recipe.picture}
                   created_at={publicationDate}
                   user={recipe.user_detail.username}
+                  user_id={recipe.user_detail.id}
                 />
               </a>
             );
