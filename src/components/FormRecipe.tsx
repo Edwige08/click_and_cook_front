@@ -1,6 +1,6 @@
 "use client";
 
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, Trash2 } from "lucide-react";
 import Input from "./Input";
 import { useEffect, useState } from "react";
 import ButtonGreen from "./ButtonGreen";
@@ -15,6 +15,7 @@ export default function FormRecipe() {
     quantity: number;
     unity: string;
   }
+
 
   interface Step {
     description: string;
@@ -112,7 +113,7 @@ export default function FormRecipe() {
             prep_time_min: prepTime,
             cook_time_min: cookTime,
             servings: servings,
-            picture: "https://source.unsplash.com/random/800x600",
+            picture: "https://placehold.co/600x400",
             ingredients: ingredientsList.map(
               ({ ingredient, quantity, unity }) => ({
                 title: ingredient,
@@ -301,8 +302,8 @@ export default function FormRecipe() {
                                 type="text"
                                 placeholder="ex : Epluchez les carottes."
                                 classes="w-[92%] h-20"
-                            /> */}
-                  {/* <button className="flex flex-col items-center w-[8%] ">
+                            />
+                  <button className="flex flex-col items-center w-[8%] ">
                                 <p className="m-auto p-1 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
                                     <Trash2 />
                                 </p>
