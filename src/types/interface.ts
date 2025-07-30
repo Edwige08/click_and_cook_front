@@ -10,6 +10,19 @@ export interface UserDetail {
     username: string,
 }
 
+export interface UserProfile {
+    id: number,
+    username: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    is_followed: boolean,
+    followers_count: number,
+    following_count: number,
+    recipes_count: number,
+    total_likes_received: number,
+}
+
 export interface Follows {
     followed_user_detail: UserDetail,
     following_user_detail: UserDetail,
