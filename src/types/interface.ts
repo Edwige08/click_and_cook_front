@@ -52,7 +52,7 @@ export interface Recipe {
     steps: Step[];
     picture: string;
     likes_count: number;
-    is_liked: number;
+    is_liked: boolean;
     user: number;
     user_detail: UserDetail;
     created_at: string;
