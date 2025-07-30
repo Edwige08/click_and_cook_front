@@ -5,26 +5,17 @@ import Input from "./Input";
 import { useEffect, useState } from "react";
 import ButtonGreen from "./ButtonGreen";
 import { useRouter } from "next/navigation";
+import { Step, Ingredient } from "@/types/interface";
 
 export default function FormRecipe() {
   const router = useRouter();
+  
   const [loading, setLoading] = useState(false);
-
-  interface Ingredient {
-    ingredient: string;
-    quantity: number;
-    unity: string;
-  }
-
-
-  interface Step {
-    description: string;
-  }
-
   const [newTitle, setNewTitle] = useState<string>("");
   const [prepTime, setPrepTime] = useState<number>(0);
   const [cookTime, setCookTime] = useState<number>(0);
   const [servings, setServings] = useState<number>(0);
+  const [urlPhoto, setUrlPhoto] = useState<string>("");
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([
     { ingredient: "", quantity: 0, unity: "" },
   ]);
@@ -90,7 +81,7 @@ export default function FormRecipe() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     setLoading(true);
 
     try {
@@ -113,7 +104,7 @@ export default function FormRecipe() {
             prep_time_min: prepTime,
             cook_time_min: cookTime,
             servings: servings,
-            picture: "https://placehold.co/600x400",
+            picture: urlPhoto,
             ingredients: ingredientsList.map(
               ({ ingredient, quantity, unity }) => ({
                 title: ingredient,
@@ -324,9 +315,23 @@ export default function FormRecipe() {
             </button>
           </div>
         </div>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="" className="font-bold">
+            Url de la photo de la recette :
+          </label>
+          <Input
+            inputName="urlPhoto"
+            type="text"
+            placeholder="ex : https://mon-url-de-photo.com/photo0123.jpg"
+            value={urlPhoto}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUrlPhoto(e.target.value)
+            }
+          />
+        </div>
       </div>
       <div className="flex flex-col justify-center m-auto">
-        <ButtonGreen type="submit" text="Publier la recette" disabled={loading}/>
+        <ButtonGreen type="submit" text="Publier la recette" disabled={loading} />
       </div>
     </form>
   );
