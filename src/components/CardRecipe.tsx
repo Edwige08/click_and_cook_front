@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function CardRecipe(props: {
     id: number,
     title: string,
@@ -6,9 +8,11 @@ export default function CardRecipe(props: {
     servings: number,
     picture: string,
     created_at: string,
-    user: string
+    user: string,
+    user_id: number,
 }) {
     return (
+
         <article className="flex flex-col items-center mx-2 max-w-80 overflow-hidden border rounded-3xl shadow-lg duration-120 ease-in-out hover:translate-1">
             <div className={"flex flex-col justify-center mb-2 overflow-hidden w-full h-50"}>
                 <img
@@ -23,12 +27,15 @@ export default function CardRecipe(props: {
                 <h3 className="mb-2 text-center font-bold">
                     {props.title}
                 </h3>
-                <p className="flex flex-row justify-end px-2 pb-2 text-end text-sm">
-                    Publiée le {props.created_at}
-                    <br />
-                    Par 👩‍🍳 {props.user}
-                </p>
+                <div className="flex flex-col items-end px-2 pb-2 text-end text-sm">
+                    <p>Publiée le {props.created_at}</p>
+                    <p className="flex flex-row gap-1">Par 👩‍🍳
+                        <Link href={`home/userProfile/${props.user_id}`} className="underline cursor-pointer">
+                            {props.user}
+                        </Link>
+                    </p>
+                </div>
             </div>
-        </article>
+        </article >
     )
 }
