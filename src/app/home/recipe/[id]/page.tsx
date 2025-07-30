@@ -46,7 +46,6 @@ export default function displayDynamicRecipes({ params }: Props) {
     } catch (error) {
       console.log('Erreur : ', error);
     }
-
   }
 
   useEffect(() => {
@@ -112,8 +111,12 @@ export default function displayDynamicRecipes({ params }: Props) {
             })}
           </ol>
         </div> :
-        <div className="flex justify-center items-center min-h-screen">
-          <p>Chargement de la recette...</p>
+        <div className="flex flex-col m-5 md:mx-10 p-5 md:p-10 bg-(--orangeColor) border border-(--darkBlue) shadow-xl/20 rounded-lg max-w-250">
+          <img 
+            src="https://cdn.pixabay.com/animation/2024/07/08/23/37/23-37-00-615_512.gif"
+            alt="Chargement..."
+          />
+          <p className="text-2xl text-center">Chargement de la recette...</p>
         </div>
       }
     </div>
