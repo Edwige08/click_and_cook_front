@@ -1,5 +1,3 @@
-import { ButtonHTMLAttributes } from "react";
-
 export default function ButtonGreen(props: {
   type?: "submit" | "button";
   disabled?: boolean;
