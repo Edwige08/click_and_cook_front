@@ -102,13 +102,17 @@ export default function Home() {
                     )
                 })}
                 {myFollowsList.length > 0 ?
-                    "" :
+                    <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                        <Link href="/home">
+                            ✨ Découvrir encore plus de nouvelles recettes et leurs créateurs
+                        </Link>
+                    </button> :
                     <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myFollows ? "" : "hidden"}`}>
                         <p className="text-center">
-                            {myFollowsList.length > 0 ? "" : "Vous ne suivez personne pour le moment 🤷‍♀️"}
+                            Vous ne suivez personne pour le moment 🤷‍♀️
                         </p>
                         <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
-                            <Link href="/home" className="underline">
+                            <Link href="/home">
                                 ✨ Découvrir de nouvelles recettes et leurs créateurs
                             </Link>
                         </button>
@@ -125,10 +129,14 @@ export default function Home() {
                 })}
 
                 {myFollowersList.length > 0 ?
-                    "" :
+                    <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                        <Link href="/home">
+                            ✨ Découvrir encore plus de nouvelles recettes et leurs créateurs
+                        </Link>
+                    </button> :
                     <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myFollowers ? "" : "hidden"}`}>
                         <p className="text-center">
-                            {myFollowersList.length > 0 ? "" : "Vous n'avez pas encore de follower 🤷‍♀️"}
+                            Vous n'avez pas encore de follower 🤷‍♀️
                         </p>
                         <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
                             <Link href="/home">
