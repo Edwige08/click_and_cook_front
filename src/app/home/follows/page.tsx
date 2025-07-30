@@ -5,6 +5,7 @@ import { useUser } from "@/components/UserInfos"
 import { useEffect, useState } from "react"
 import { Follows } from "@/types/interface"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 
 export default function Home() {
     const [myFollows, setMyFollows] = useState<boolean>(true)
@@ -91,6 +92,7 @@ export default function Home() {
                     Mes abonnés
                 </button>
             </div>
+
             <div className={`flex flex-col gap-1 py-2 px-4 ${myFollows ? "" : "hidden"}`}>
                 {myFollowsList.map((follow) => {
                     return (
@@ -99,6 +101,19 @@ export default function Home() {
                             key={follow.followed_user_detail.id} />
                     )
                 })}
+                {myFollowsList.length > 0 ?
+                    "" :
+                    <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myFollows ? "" : "hidden"}`}>
+                        <p className="text-center">
+                            {myFollowsList.length > 0 ? "" : "Vous ne suivez personne pour le moment 🤷‍♀️"}
+                        </p>
+                        <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                            <Link href="/home" className="underline">
+                                ✨ Découvrir de nouvelles recettes et leurs créateurs
+                            </Link>
+                        </button>
+                    </div>
+                }
             </div>
             <div className={`flex flex-col gap-1 py-2 px-4 ${myFollowers ? "" : "hidden"}`}>
                 {myFollowersList.map((follow) => {
@@ -108,6 +123,20 @@ export default function Home() {
                             key={follow.following_user_detail.id} />
                     )
                 })}
+
+                {myFollowersList.length > 0 ?
+                    "" :
+                    <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myFollowers ? "" : "hidden"}`}>
+                        <p className="text-center">
+                            {myFollowersList.length > 0 ? "" : "Vous n'avez pas encore de follower 🤷‍♀️"}
+                        </p>
+                        <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                            <Link href="/home">
+                                ✨ Découvrir de nouvelles recettes et leurs créateurs
+                            </Link>
+                        </button>
+                    </div>
+                }
             </div>
         </>
     )
