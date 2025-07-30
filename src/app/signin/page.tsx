@@ -1,14 +1,11 @@
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
 import FormSignIn from "../../components/FormSignIn";
 import Link from "next/link";
 
 export default function Home() {
     return (
         <>
-            <header
-                className="flex flex-col items-center bg-(--lightColor)"
-            >
+            <header className="flex flex-col items-center bg-(--lightColor)">
                 <Link href="/">
                     <Image
                         src="/images/logo_click_and_cook.png"
