@@ -30,9 +30,18 @@ export default function displayDynamicRecipes({ params }: Props) {
 
   async function fetchRecipe() {
     try {
+      const token = localStorage.getItem("auth_token");
+      if (!token) return;
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/${resolvedParams.id}/`,
-        { cache: "no-store" }
+        {
+          cache: "no-store",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+          }
+        }
       )
 
       if (!response.ok) {
@@ -45,6 +54,81 @@ export default function displayDynamicRecipes({ params }: Props) {
 
     } catch (error) {
       console.log('Erreur : ', error);
+    }
+  }
+
+  async function handleClick() {
+    if (recipe?.is_liked) {
+      try {
+        const token = localStorage.getItem("auth_token");
+        if (!token) return;
+        const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/likes/${resolvedParams.id}/`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+      })
+
+      if (!response.ok) {
+        throw new Error("Erreur lors du unlike")
+      }
+
+      console.log("🥗 unlike réussi !");
+      
+      setRecipe(prevRecipe => {
+        if (prevRecipe) {
+          return {
+            ...prevRecipe,
+            is_liked: false
+          };
+        }
+        return prevRecipe;
+      });
+
+      } catch (error) {
+        console.log("Erreur unlike : ", error);
+      }
+
+    } else {
+
+      try {
+        const token = localStorage.getItem("auth_token");
+        if (!token) return;
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/likes/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({
+            recipe: `${resolvedParams.id}`
+          })
+        })
+
+        if (!response.ok) {
+          throw new Error("Erreur")
+        }
+
+        const data = await response.json();
+        console.log("🍕 ", data)
+
+        setRecipe(prevRecipe => {
+          if (prevRecipe) {
+            return {
+              ...prevRecipe,
+              is_liked: true
+            };
+          }
+          return prevRecipe;
+        });
+
+
+      } catch (error) {
+        console.log("Erreur : ", error);
+
+      }
     }
   }
 
@@ -72,8 +156,11 @@ export default function displayDynamicRecipes({ params }: Props) {
           </div>
           <h2 className="pt-5 text-center text-2xl font-bold">{recipe?.title}</h2>
           <div className="flex flex-row justify-center my-3">
-            <button className="px-3 py-1 rounded-lg text-(--lightColor) bg-(--redColor) hover:bg-(--darkBlue) shadow-xl">
-              Sauvegarder 🤍❤️
+            <button
+              className="px-3 py-1 rounded-lg text-(--lightColor) bg-(--redColor) hover:bg-(--darkBlue) shadow-xl"
+              onClick={handleClick}
+            >
+              {recipe.is_liked ? "Sauvegardé ❤️" : "Sauvegarder 🤍"}
             </button>
           </div>
           <div className="pb-2 text-end italic">
@@ -112,7 +199,7 @@ export default function displayDynamicRecipes({ params }: Props) {
           </ol>
         </div> :
         <div className="flex flex-col m-5 md:mx-10 p-5 md:p-10 bg-(--orangeColor) border border-(--darkBlue) shadow-xl/20 rounded-lg max-w-250">
-          <img 
+          <img
             src="https://cdn.pixabay.com/animation/2024/07/08/23/37/23-37-00-615_512.gif"
             alt="Chargement..."
           />
