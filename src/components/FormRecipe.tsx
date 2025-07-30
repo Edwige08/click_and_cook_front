@@ -1,6 +1,6 @@
 "use client";
 
-import { CirclePlus, Trash2 } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import Input from "./Input";
 import { useEffect, useState } from "react";
 import ButtonGreen from "./ButtonGreen";
@@ -9,17 +9,15 @@ import { Step, Ingredient } from "@/types/interface";
 
 export default function FormRecipe() {
   const router = useRouter();
-  
+
   const [loading, setLoading] = useState(false);
   const [newTitle, setNewTitle] = useState<string>("");
   const [prepTime, setPrepTime] = useState<number>(0);
   const [cookTime, setCookTime] = useState<number>(0);
   const [servings, setServings] = useState<number>(0);
   const [urlPhoto, setUrlPhoto] = useState<string>("");
-  const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([
-    { ingredient: "", quantity: 0, unity: "" },
-  ]);
   const [stepsList, setStepsList] = useState<Step[]>([{ description: "" }]);
+  const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([{ ingredient: "", quantity: 0, unity: "" }]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -49,13 +47,13 @@ export default function FormRecipe() {
     fetchUser();
   }, []);
 
-  const addIngredient = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const addIngredient = () => {
     setIngredientsList((prev) => [
       ...prev,
       { ingredient: "", quantity: 0, unity: "" },
     ]);
   };
-  const addStep = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const addStep = () => {
     setStepsList((prev) => [...prev, { description: "" }]);
   };
 
@@ -64,7 +62,7 @@ export default function FormRecipe() {
     key: keyof Ingredient,
     index: number
   ) => {
-    let updated: Ingredient[] = [...ingredientsList];
+    const updated: Ingredient[] = [...ingredientsList];
     if (key === "quantity") {
       updated[index][key] = value as number;
     } else {
@@ -74,7 +72,7 @@ export default function FormRecipe() {
   };
 
   const handleChangeStep = (value: string, key: keyof Step, index: number) => {
-    let updated: Step[] = [...stepsList];
+    const updated: Step[] = [...stepsList];
     updated[index][key] = value;
     setStepsList(updated);
   };
@@ -252,11 +250,6 @@ export default function FormRecipe() {
                 </div>
               );
             })}
-            {/* <button className="flex flex-col items-center w-[8%] ">
-                            <p className="m-auto p-1 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
-                                <Trash2 />
-                            </p>
-                        </button> */}
             <div className="flex flex-row gap-2">
               <div className="w-[44%] text-(--orangeColor)">.</div>
               <div className="w-[19%] text-(--orangeColor)">.</div>
@@ -288,17 +281,6 @@ export default function FormRecipe() {
                       handleChangeStep(e.target.value, "description", index)
                     }
                   />
-                  {/* <Input
-                                inputName="step"
-                                type="text"
-                                placeholder="ex : Epluchez les carottes."
-                                classes="w-[92%] h-20"
-                            />
-                  <button className="flex flex-col items-center w-[8%] ">
-                                <p className="m-auto p-1 rounded-xl shadow-sm bg-(--redColor) text-(--lightColor)">
-                                    <Trash2 />
-                                </p>
-                            </button> */}
                 </div>
               );
             })}
