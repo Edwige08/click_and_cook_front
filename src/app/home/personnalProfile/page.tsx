@@ -10,6 +10,8 @@ export default function personnalProfile() {
 
   const [recipes, setRecipes] = useState<Recipes[]>([]);
   const [recipesLikedList, setRecipesLikedList] = useState<Recipes[]>([]);
+  const [followsList, setFollowsList] = useState<[]>([]);
+  const [followersList, setFollowersList] = useState<[]>([]);
 
   const user = useUser().user;
 
@@ -45,13 +47,52 @@ export default function personnalProfile() {
     }
     );
     const data = await response.json();
-    console.log('🔰🔰', data)
     setRecipesLikedList(data.results);
+  }
+
+  async function getMyFollows() {
+    const token = localStorage.getItem("auth_token");
+    if (!token) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/follows/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }
+    );
+    const data = await response.json();
+    setFollowsList(data.results);
+  }
+
+  async function getMyFollowers() {
+    const token = localStorage.getItem("auth_token");
+    if (!token) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/follows/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }
+    );
+    const data = await response.json();
+    setFollowersList(data.results);
   }
 
   useEffect(() => {
     getLikedRecipes()
   }, []);
+
+  useEffect(() => {
+    getMyFollows()
+  }, [])
+
+  useEffect(() => {
+    getMyFollowers()
+  }, [])
 
   return (
     <>
@@ -59,6 +100,7 @@ export default function personnalProfile() {
         <h2 className="pt-7 pb-3 text-2xl font-bold">
           Bonjour {user ? user.username : ""} !
         </h2>
+
         <p className="pb-5 italic">{user ? `Inscrit.e depuis le ${new Date(user.created_at).toLocaleDateString()}` : ``}</p>
       </div>
       <div className="flex flex-row gap-2 justify-evenly flex-wrap p-2 mx-5 my-2 lg:mx-20 xl:mx-45 pt-5 rounded-lg shadow-lg bg-(--orangeColor)">
@@ -66,12 +108,18 @@ export default function personnalProfile() {
           statNumber={recipes.length}
           statName={recipes.length > 1 ? "Recettes postées" : "Recette postée"}
         />
-        <CardProfileStat statNumber={12} statName="Abonnements" />
+        <CardProfileStat
+          statNumber={followsList.length}
+          statName={followsList.length > 1 ? "Abonnements" : "Abonnement"}
+        />
         <CardProfileStat
           statNumber={recipesLikedList.length}
           statName={recipes.length > 1 ? "Recettes favorites" : "Recette favorite"}
         />
-        <CardProfileStat statNumber={3} statName="Abonnés" />
+        <CardProfileStat 
+          statNumber={followersList.length}
+          statName={followersList.length > 1 ? "Abonnés" : "Abonné"}
+        />
       </div>
       <div>
         <h3 className="py-5 text-center text-lg font-bold">
