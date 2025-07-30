@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Recipe } from "@/types/interface"
 import { useUser } from "@/components/UserInfos"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 
 export default function Home() {
 
@@ -54,7 +55,6 @@ export default function Home() {
             }
             );
             const data = await response.json();
-            console.log('👀👀', data)
             setRecipes(data);
         }
         getRecipes();
@@ -74,7 +74,6 @@ export default function Home() {
             }
             );
             const data = await response.json();
-            console.log('🔰🔰', data)
             setRecipesLikedList(data);
         }
         getRecipesLiked();
@@ -94,6 +93,7 @@ export default function Home() {
                     Mes recettes favorites
                 </button>
             </div>
+
             <div>
                 <div className={`flex flex-col gap-1 py-2 px-4 ${myRecipes ? "" : "hidden"}`}>
                     {recipes.map((recipe) => {
@@ -101,14 +101,28 @@ export default function Home() {
                             <MyRecipes
                                 title={recipe.title}
                                 id={recipe.id}
-                                key={recipe.id} 
-                                />
-
+                                key={recipe.id}
+                            />
                         )
                     })}
-                    <p className="text-center">
-                        {recipes.length > 0 ? "" : "Vous n'avez pas encore publié de recettes 😢"}
-                    </p>
+
+                    {recipes.length > 0 ?
+                        <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                            <Link href="/home">
+                                ✨ Découvrir encore plus de nouvelles recettes et leurs créateurs
+                            </Link>
+                        </button> :
+                        <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myRecipes ? "" : "hidden"}`}>
+                            <p className="text-center">
+                                Vous n'avez pas encore publié de recettes 😢
+                            </p>
+                            <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                                <Link href="/home">
+                                    ✨ Découvrir de nouvelles recettes et leurs créateurs
+                                </Link>
+                            </button>
+                        </div>
+                    }
                 </div>
 
                 <div className={`flex flex-col gap-1 py-2 px-4 ${recipesLiked ? "" : "hidden"}`}>
@@ -120,9 +134,25 @@ export default function Home() {
                                 key={recipe.id} />
                         )
                     })}
-                    <p className="text-center">
-                        {recipesLikedList.length > 0 ? "" : "Vous n'avez pour le moment pas de recettes dans vos favoris 😢"}
-                    </p>
+
+
+                    {recipesLikedList.length > 0 ?
+                        <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                            <Link href="/home">
+                                ✨ Découvrir encore plus de nouvelles recettes et leurs créateurs
+                            </Link>
+                        </button> :
+                        <div className={`flex flex-col items-center gap-1 py-2 px-4 ${recipesLiked ? "" : "hidden"}`}>
+                            <p className="text-center">
+                                Vous n'avez pas encore de recettes dans vos favoris 😢
+                            </p>
+                            <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
+                                <Link href="/home">
+                                    ✨ Découvrir de nouvelles recettes et leurs créateurs
+                                </Link>
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </>
