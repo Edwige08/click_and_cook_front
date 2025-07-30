@@ -2,7 +2,7 @@
 
 import MyRecipes from "@/components/MyRecipes"
 import { useEffect, useState } from "react"
-import { Recipes } from "@/types/interface"
+import { Recipe } from "@/types/interface"
 import { useUser } from "@/components/UserInfos"
 import { useSearchParams } from "next/navigation"
 
@@ -10,8 +10,8 @@ export default function Home() {
 
     const [myRecipes, setMyRecipes] = useState<boolean>(true)
     const [recipesLiked, setRecipesLiked] = useState<boolean>(false)
-    const [recipes, setRecipes] = useState<Recipes[]>([])
-    const [recipesLikedList, setRecipesLikedList] = useState<Recipes[]>([])
+    const [recipes, setRecipes] = useState<Recipe[]>([])
+    const [recipesLikedList, setRecipesLikedList] = useState<Recipe[]>([])
 
     const user = useUser().user;
     const searchParams = useSearchParams()
@@ -100,7 +100,9 @@ export default function Home() {
                         return (
                             <MyRecipes
                                 title={recipe.title}
-                                key={recipe.id} />
+                                id={recipe.id}
+                                key={recipe.id} 
+                                />
 
                         )
                     })}
@@ -114,6 +116,7 @@ export default function Home() {
                         return (
                             <MyRecipes
                                 title={recipe.title}
+                                id={recipe.id}
                                 key={recipe.id} />
                         )
                     })}
