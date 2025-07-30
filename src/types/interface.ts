@@ -26,6 +26,12 @@ export interface Ingredients {
     unity: string;
 }
 
+export interface Ingredient {
+    ingredient: string;
+    quantity: number;
+    unity: string;
+}
+
 export interface Recipes {
     id: number;
     title: string;
