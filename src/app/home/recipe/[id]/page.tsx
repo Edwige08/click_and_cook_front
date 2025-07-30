@@ -54,11 +54,11 @@ export default function displayDynamicRecipes({ params }: Props) {
     fetchRecipe()
   }, [resolvedParams.id]);
 
-  const pubDate = new Date(recipe?.created_at);
-  const publicationDate = `
-             ${pubDate.getDate()}
-            ${pubDate.getDate() == 1 ? "er" : ""}
-             ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
+  let publicationDate = "";
+  if (recipe?.created_at) {
+    const pubDate = new Date(recipe.created_at);
+    publicationDate = `${pubDate.getDate()}${pubDate.getDate() === 1 ? "er" : ""} ${monthInLetters(pubDate.getMonth())} ${pubDate.getFullYear()}`;
+  }
 
   return (
     <div className="flex flex-col items-center">
