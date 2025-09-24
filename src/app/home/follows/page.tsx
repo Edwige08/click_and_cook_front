@@ -8,7 +8,7 @@ import { Follows } from "@/types/interface"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 
-export default function Home() {
+function FollowsContent() {
     const [myFollows, setMyFollows] = useState<boolean>(true)
     const [myFollowers, setMyFollowers] = useState<boolean>(false)
     const [myFollowsList, setMyFollowsList] = useState<Follows[]>([])
@@ -79,19 +79,8 @@ export default function Home() {
         getFollowers();
     }, [user?.id]);
 
-
-    function LoadingFallback() {
-        return (
-            <div className="flex flex-col items-center justify-center py-10">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                <p className="mt-2 text-gray-600">Chargement...</p>
-            </div>
-        )
-    }
-
     return (
-        <Suspense fallback={<LoadingFallback />}>
-            
+        <>
             <div className="flex flex-row gap-2 md:gap-5 justify-center my-5 ">
                 <button
                     onClick={displayMyFollows}
@@ -159,7 +148,23 @@ export default function Home() {
                     </div>
                 }
             </div>
+        </>
+    )
+}
 
+function LoadingFallback() {
+    return (
+        <div className="flex flex-col items-center justify-center py-10">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            <p className="mt-2 text-gray-600">Chargement...</p>
+        </div>
+    )
+}
+
+export default function Home() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <FollowsContent />
         </Suspense>
     )
 }
