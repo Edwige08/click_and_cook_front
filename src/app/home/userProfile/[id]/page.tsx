@@ -12,7 +12,7 @@ type Props = {
 export default function DisplayDynamicUsers({ params }: Props) {
     const resolvedParams = use(params);
 
-    const [userInfos, setUserInfos] = useState<UserProfile>({});
+    const [userInfos, setUserInfos] = useState<UserProfile>({id: 0, username: "", firstname: "", lastname: "", email: "", is_followed: false, followers_count: 0, following_count: 0, recipes_count: 0, total_likes_received: 0});
     const [userRecipes, setUserRecipes] = useState<Recipe[]>([])
 
     async function fetchUser() {
@@ -125,7 +125,7 @@ export default function DisplayDynamicUsers({ params }: Props) {
                             servings={recipe.servings}
                             picture={recipe.picture}
                             created_at={recipe.created_at}
-                            user={recipe.user_detail}
+                            user={recipe.user_detail.username}
                             user_id={recipe.user_detail.id}
                         />
                     )
