@@ -6,7 +6,7 @@ import { useUser } from "@/components/UserInfos";
 import { useEffect, useState } from "react";
 import { Recipes } from "@/types/interface"
 
-export default function personnalProfile() {
+export default function PersonnalProfile() {
 
   const [recipes, setRecipes] = useState<Recipes[]>([]);
   const [recipesLikedList, setRecipesLikedList] = useState<Recipes[]>([]);

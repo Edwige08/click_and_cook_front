@@ -114,7 +114,7 @@ export default function Home() {
                         </button> :
                         <div className={`flex flex-col items-center gap-1 py-2 px-4 ${myRecipes ? "" : "hidden"}`}>
                             <p className="text-center">
-                                Vous n'avez pas encore publié de recettes 😢
+                                Vous n&apos;avez pas encore publié de recettes 😢
                             </p>
                             <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
                                 <Link href="/home">
@@ -144,7 +144,7 @@ export default function Home() {
                         </button> :
                         <div className={`flex flex-col items-center gap-1 py-2 px-4 ${recipesLiked ? "" : "hidden"}`}>
                             <p className="text-center">
-                                Vous n'avez pas encore de recettes dans vos favoris 😢
+                                Vous n&apos;avez pas encore de recettes dans vos favoris 😢
                             </p>
                             <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
                                 <Link href="/home">

@@ -8,7 +8,7 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export default function displayDynamicRecipes({ params }: Props) {
+export default function DisplayDynamicRecipes({ params }: Props) {
   const resolvedParams = use(params);
 
   const [recipe, setRecipe] = useState<Recipe | null>(null)
