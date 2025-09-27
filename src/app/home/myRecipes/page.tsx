@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from "react"
 import MyRecipes from "@/components/MyRecipes"
 import { useEffect, useState } from "react"
 import { Recipe } from "@/types/interface"
@@ -7,15 +8,14 @@ import { useUser } from "@/components/UserInfos"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 
-export default function Home() {
-
+function MyRecipesContent() {
     const [myRecipes, setMyRecipes] = useState<boolean>(true)
     const [recipesLiked, setRecipesLiked] = useState<boolean>(false)
     const [recipes, setRecipes] = useState<Recipe[]>([])
     const [recipesLikedList, setRecipesLikedList] = useState<Recipe[]>([])
 
     const user = useUser().user;
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams() // useSearchParams dans le composant enfant
 
     const displayMyRecipes = () => {
         if (!myRecipes) {
@@ -44,40 +44,48 @@ export default function Home() {
     useEffect(() => {
         async function getRecipes() {
             const token = localStorage.getItem("auth_token");
-            if (!token) return;
+            if (!token || !user?.id) return;
 
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/${user?.id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Token ${token}`,
-                },
+            try {
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/${user.id}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Token ${token}`,
+                    },
+                }
+                );
+                const data = await response.json();
+                setRecipes(data);
+            } catch (error) {
+                console.error('Error fetching recipes:', error)
             }
-            );
-            const data = await response.json();
-            setRecipes(data);
         }
         getRecipes();
-    }, []);
+    }, [user?.id]);
 
     useEffect(() => {
         async function getRecipesLiked() {
             const token = localStorage.getItem("auth_token");
-            if (!token) return;
+            if (!token || !user?.id) return;
 
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/liked-by/${user?.id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Token ${token}`,
-                },
+            try {
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/recipes/user/liked-by/${user.id}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Token ${token}`,
+                    },
+                }
+                );
+                const data = await response.json();
+                setRecipesLikedList(data);
+            } catch (error) {
+                console.error('Error fetching liked recipes:', error)
             }
-            );
-            const data = await response.json();
-            setRecipesLikedList(data);
         }
         getRecipesLiked();
-    }, []);
+    }, [user?.id]);
 
     return (
         <>
@@ -135,7 +143,6 @@ export default function Home() {
                         )
                     })}
 
-
                     {recipesLikedList.length > 0 ?
                         <button className="flex flex-col items-center mx-10 my-5 px-4 py-2 border rounded-lg shadow-xl text-white bg-(--redColor) hover:bg-(--darkBlue)">
                             <Link href="/home">
@@ -156,5 +163,22 @@ export default function Home() {
                 </div>
             </div>
         </>
+    )
+}
+
+function LoadingFallback() {
+    return (
+        <div className="flex flex-col items-center justify-center py-10">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            <p className="mt-2 text-gray-600">Chargement...</p>
+        </div>
+    )
+}
+
+export default function Home() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <MyRecipesContent />
+        </Suspense>
     )
 }
